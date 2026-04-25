@@ -148,11 +148,10 @@ if detect:
     # -------------------------------
     st.markdown("<div class='card'>", unsafe_allow_html=True)
     st.subheader("📊 Detection Results")
-    
-   if status == "Normal":
-       st.success("🟢 Normal Traffic Detected")
-   else:
-       st.error("🔴 Attack Detected! Immediate Action Required")
+    if status == "Normal":
+        st.success("🟢 Normal Traffic Detected")
+    else:
+        st.error("🔴 Attack Detected! Immediate Action Required")
 
     c1, c2, c3 = st.columns(3)
 
