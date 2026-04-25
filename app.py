@@ -104,11 +104,11 @@ with col_btn2:
 if detect:
 
     input_data = pd.DataFrame({
-        'Flow Duration': float(flow_duration),
-        'Total Fwd Packets': float(fwd_packets),
-        'Total Backward Packets': float(bwd_packets),
-        'Flow Bytes/s': float(flow_bytes),
-        'Flow Packets/s': float(flow_packets)
+        'Flow Duration': [float(flow_duration)],
+        'Total Fwd Packets': [float(fwd_packets)],
+        'Total Backward Packets': [float(bwd_packets)],
+        'Flow Bytes/s': [float(flow_bytes)],
+        'Flow Packets/s': [float(flow_packets)]
     })
 
     input_data = input_data[FEATURES]
