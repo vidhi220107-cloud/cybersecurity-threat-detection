@@ -79,15 +79,15 @@ st.subheader("📥 Enter Network Traffic Data")
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    flow_duration = st.number_input("Flow Duration", value=5000.0)
-    fwd_packets = st.number_input("Total Fwd Packets", value=20.0)
+    flow_duration = st.text_input("Flow Duration", value=5000.0)
+    fwd_packets = st.text_input("Total Fwd Packets", value=20.0)
 
 with col2:
-    bwd_packets = st.number_input("Total Backward Packets", value=15.0)
-    flow_bytes = st.number_input("Flow Bytes/s", value=3000.0)
+    bwd_packets = st.text_input("Total Backward Packets", value=15.0)
+    flow_bytes = st.text_input("Flow Bytes/s", value=3000.0)
 
 with col3:
-    flow_packets = st.number_input("Flow Packets/s", value=50.0)
+    flow_packets = st.text_input("Flow Packets/s", value=50.0)
 
 st.markdown("</div>", unsafe_allow_html=True)
 
@@ -104,11 +104,11 @@ with col_btn2:
 if detect:
 
     input_data = pd.DataFrame({
-        'Flow Duration': [flow_duration],
-        'Total Fwd Packets': [fwd_packets],
-        'Total Backward Packets': [bwd_packets],
-        'Flow Bytes/s': [flow_bytes],
-        'Flow Packets/s': [flow_packets]
+        'Flow Duration': float(flow_duration),
+        'Total Fwd Packets': float(fwd_packets),
+        'Total Backward Packets': float(bwd_packets),
+        'Flow Bytes/s': float(flow_bytes),
+        'Flow Packets/s': float(flow_packets)
     })
 
     input_data = input_data[FEATURES]
@@ -180,7 +180,7 @@ if detect:
     st.bar_chart(df_graph.set_index("Feature"))
     st.markdown("</div>", unsafe_allow_html=True)
 
-    # -------------------------------
+    # ------------------------------
     # RISK GRAPH
     # -------------------------------
     st.markdown("<div class='card'>", unsafe_allow_html=True)
