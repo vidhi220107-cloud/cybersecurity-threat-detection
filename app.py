@@ -114,42 +114,35 @@ if detect:
     input_data = input_data[FEATURES]
     input_scaled = scaler.transform(input_data)
 
-    # ML prediction
-prediction = model.predict(input_scaled)
-prob = model.predict_proba(input_scaled)
-
-# Calculate base risk
-risk_score = np.max(prob) * 100
-
-# Convert inputs (IMPORTANT)
-flow_duration = float(flow_duration)
-fwd_packets = float(fwd_packets)
-bwd_packets = float(bwd_packets)
-flow_bytes = float(flow_bytes)
-flow_packets = float(flow_packets)
-
-# Rule-based detection (for extreme values)
-rule_attack = (
-    flow_duration > 1000000 or
-    fwd_packets > 1000 or
-    bwd_packets > 1000 or
-    flow_bytes > 500000 or
-    flow_packets > 5000
-)
-
-# Final decision
-if rule_attack:
-    status = "Attack"
-    severity = "HIGH RISK"
-    risk_score = 95.0
-else:
-    if prediction[0] == 0:
-        status = "Normal"
-        severity = "SAFE"
-        risk_score = 100 - risk_score
-    else:
+    
+    prediction = model.predict(input_scaled)
+    prob = model.predict_proba(input_scaled)
+    risk_score = np.max(prob) * 100
+    flow_duration = float(flow_duration)
+    fwd_packets = float(fwd_packets)
+    bwd_packets = float(bwd_packets)
+    flow_bytes = float(flow_bytes)
+    flow_packets = float(flow_packets)
+    
+    rule_attack = (
+        flow_duration > 1000000 or
+        fwd_packets > 1000 or
+        bwd_packets > 1000 or
+        flow_bytes > 500000 or
+        flow_packets > 5000
+    )
+    if rule_attack:
         status = "Attack"
         severity = "HIGH RISK"
+        risk_score = 95.0
+    else:
+        if prediction[0] == 0:
+            status = "Normal"
+            severity = "SAFE"
+            risk_score = 100 - risk_score
+        else:
+            status = "Attack"
+            severity = "HIGH RISK"
     # -------------------------------
     # RESULT SECTION
     # -------------------------------
