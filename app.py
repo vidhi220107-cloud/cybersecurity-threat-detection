@@ -125,11 +125,11 @@ if detect:
     flow_packets = float(flow_packets)
     
     rule_attack = (
-        flow_duration > 1000000 or
-        fwd_packets > 1000 or
-        bwd_packets > 1000 or
-        flow_bytes > 500000 or
-        flow_packets > 5000
+        flow_duration > 5000000 or
+        fwd_packets > 2000 or
+        bwd_packets > 2000 or
+        flow_bytes > 800000 or
+        flow_packets > 8000
     )
     if rule_attack:
         status = "Attack"
